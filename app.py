@@ -112,6 +112,15 @@ def edit_article(article_id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    tg_data = {
+        "id": request.args.get('id', None),
+        "first_name": request.args.get('first_name', None),
+        "last_name": request.args.get('last_name', None),
+        "username": request.args.get('username', None),
+        "auth_date": request.args.get('auth_date', None),
+        "hash": request.args.get('hash', None)
+    }
+    session['username'] = tg_data["id"]
     form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
         name = form.name.data
@@ -126,7 +135,7 @@ def register():
         mysql.connection.commit()
         cur.close()
         flash('You are now registered and can log in', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('dashboard'))
     return render_template('register.html', form=form)
 
 
