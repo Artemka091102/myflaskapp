@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>Welcome, {{ session.username }}</h1>
+    <img src="{{ session.photo_url }}">
     <a class="btn btn-success" href="/add_article">Add Article</a>
     <table class="table">
         <thead>
