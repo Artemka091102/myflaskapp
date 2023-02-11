@@ -110,7 +110,7 @@ def edit_article(article_id):
     return render_template('edit_article.html', form=form)
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register?<string:data>', methods=['GET', 'POST'])
 def register():
     tg_data = {
         "id": request.args.get('id', None),
