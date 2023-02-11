@@ -110,7 +110,7 @@ def edit_article(article_id):
     return render_template('edit_article.html', form=form)
 
 
-@app.route('/register?<string:data>', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
     if request.method == 'POST':
