@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>{{ art.title }}</h1>
+    {{ art.body }}<br>
+    {{ art.author }} {{ art.create_date }}<br>
+    <a class="btn btn-success" href="/articles">Go Back</a>
+{% endblock %}

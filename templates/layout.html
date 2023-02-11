@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MyFlaskApp</title>
+    <script src="/static/vendor/jquery/js/jquery-3.6.3.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        {% include 'includes/_header.html' %}
+    </div>
+    <div class="container">
+        {% include 'includes/_messages.html' %}
+        {% block body %} {% endblock %}
+    </div>
+    <div class="container">
+        {% include 'includes/_footer.html' %}
+    </div>
+</body>
+
+</html>

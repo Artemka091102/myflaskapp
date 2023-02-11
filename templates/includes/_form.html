@@ -1,0 +1,22 @@
+{% macro render_form(form) %}
+    <h1>{{ form.form_title }}</h1>
+    <form method="POST">
+        {% for field in form %}
+            <div class="form-group form-control">
+                <dt>
+                    {{ field.label }}
+                </dt>
+                <dd>
+                    {{ field(**kwargs)|safe }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    {% endif %}
+                </dd>
+            </div>
+        {% endfor %}
+        <br>
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+{% endmacro %}
