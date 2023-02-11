@@ -3,7 +3,7 @@ from passlib.hash import sha256_crypt
 from flask_mysqldb import MySQL
 from functools import wraps
 
-from forms import RegisterForm, LoginForm, ArticleForm
+from forms import ArticleForm
 from supersecret import setup_app
 
 app = Flask(__name__)
@@ -122,48 +122,11 @@ def register():
     session['logged_in'] = True
     flash('You are now logged in', 'success')
     return redirect(url_for('dashboard'))
-    #form = RegisterForm(request.form)
-    #if request.method == 'POST' and form.validate():
-    #    name = form.name.data
-    #    email = form.email.data
-    #    username = form.username.data
-    #    password = sha256_crypt.hash(form.password.data)
-    #    cur = mysql.connection.cursor()
-    #    cur.execute(
-    #        'INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)',
-    #        [name, email, username, password]
-    #    )
-    #    mysql.connection.commit()
-    #    cur.close()
-    #    flash('You are now registered and can log in', 'success')
-    #    return redirect(url_for('dashboard'))
-    #return render_template('register.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm(request.form)
-    if request.method == 'POST' and form.validate():
-        username = form.username.data
-        password = form.password.data
-        cur = mysql.connection.cursor()
-        users = cur.execute(
-            'SELECT * FROM users WHERE username = %s',
-            [username]
-        )
-        if users:
-            user = cur.fetchone()
-            if sha256_crypt.verify(password, user['password']):
-                session['logged_in'] = True
-                session['username'] = username
-                flash('You are now logged in', 'success')
-                return redirect(url_for('dashboard'))
-            else:
-                flash('Wrong Password', 'danger')
-        else:
-            flash('Wrong Username', 'danger')
-        cur.close()
-    return render_template('login.html', form=form)
+    return render_template('login.html')
 
 
 @app.route('/add_article', methods=['GET', 'POST'])
