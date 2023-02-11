@@ -112,12 +112,12 @@ def edit_article(article_id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    session['id'] = request.args.get('id', None),
-    session['first_name'] = request.args.get('first_name', None),
-    session['last_name'] = request.args.get('last_name', None),
-    session['username'] = request.args.get('username', None),
-    session['photo_url'] = request.args.get('photo_url', None),
-    session['auth_date'] = request.args.get('auth_date', None),
+    session['id'] = request.args.get('id', None)
+    session['first_name'] = request.args.get('first_name', None)
+    session['last_name'] = request.args.get('last_name', None)
+    session['username'] = request.args.get('username', None)
+    session['photo_url'] = request.args.get('photo_url', None)
+    session['auth_date'] = request.args.get('auth_date', None)
     session['hash'] = request.args.get('hash', None)
     session['logged_in'] = True
     flash('You are now logged in', 'success')
