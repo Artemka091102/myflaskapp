@@ -120,23 +120,26 @@ def register():
         "auth_date": request.args.get('auth_date', None),
         "hash": request.args.get('hash', None)
     }
+    session['logged_in'] = True
     session['username'] = tg_data["id"]
-    form = RegisterForm(request.form)
-    if request.method == 'POST' and form.validate():
-        name = form.name.data
-        email = form.email.data
-        username = form.username.data
-        password = sha256_crypt.hash(form.password.data)
-        cur = mysql.connection.cursor()
-        cur.execute(
-            'INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)',
-            [name, email, username, password]
-        )
-        mysql.connection.commit()
-        cur.close()
-        flash('You are now registered and can log in', 'success')
-        return redirect(url_for('dashboard'))
-    return render_template('register.html', form=form)
+    flash('You are now logged in', 'success')
+    return redirect(url_for('dashboard'))
+    #form = RegisterForm(request.form)
+    #if request.method == 'POST' and form.validate():
+    #    name = form.name.data
+    #    email = form.email.data
+    #    username = form.username.data
+    #    password = sha256_crypt.hash(form.password.data)
+    #    cur = mysql.connection.cursor()
+    #    cur.execute(
+    #        'INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)',
+    #        [name, email, username, password]
+    #    )
+    #    mysql.connection.commit()
+    #    cur.close()
+    #    flash('You are now registered and can log in', 'success')
+    #    return redirect(url_for('dashboard'))
+    #return render_template('register.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
