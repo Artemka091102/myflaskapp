@@ -5,6 +5,7 @@
 (function () {
   let lightSwitch = document.getElementById('lightSwitch');
   if (!lightSwitch) {
+    alert("Hello");
     return;
   }
 
